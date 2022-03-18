@@ -1,62 +1,58 @@
+from tkinter import *
+
+
+class Color:
+    def __init__(self, name, r, g, b):
+        self.name = name
+        self.r = r
+        self.g = g
+        self.b = b
+
+    def __str__(self):
+        # return ("Color {" +
+        #         " name = " + str(self.name) +
+        #         ", r = " + str(self.r) +
+        #         ", g = " + str(self.g) +
+        #         ", b = " + str(self.b) + "}")
+        return f"Color {{name = {self.name}, r = {self.r}, g = {self.g}, b = {self.b}}}"
+
+    def __eq__(self, other):
+        if isinstance(other, Color):
+            return (self.r == other.r and
+                    self.g == other.g and
+                    self.b == other.b)
+        return NotImplemented
+
+
+class Rectangle:
+    x1 = 100
+    y1 = 100
+
+    def __init__(self, x2, y2):
+        self.x2 = x2
+        self.y2 = y2
+
+
 def main():
-    name = "Андрей"
-    print(name)
+    red = Color("Красный", 255, 0, 0)
+    green = Color("Зеленый", 0, 255, 0)
+    otherRed = Color("Другой красный", 255, 0, 0)
+    print(otherRed)
+    print(red)
+    print(green)
+    print(red == green)
+    print(red == otherRed)
+    root = Tk()
+    root.title("Графические примитивы")
+    root.minsize(width=500, height=400)
 
-    age = 20
-    print("Мне", age, "лет")
+    canv = Canvas(root, width=500, height=400, bg="grey")
+    rect = Rectangle(200, 200)
 
-    print(name * 5, "\n")
+    canv.create_rectangle(rect.x1, rect.y1, rect.x2, rect.y2, fill="white", outline="blue")
 
-    print("Enter your name:\n")
-    userName = input()
-    if " " in userName:
-        print("Value error for name")
-        exit(1)
-    print("Enter your age:\n")
-    try:
-        userAge = input()
-    except:
-        print("Value error for age")
-        exit(1)
-    if int(userAge) < 0 or int(userAge) > 150:
-        print("Value error for age")
-        exit(1)
-    print("Hello", userName, userAge, "years old")
-
-    userAgeInt = int(userAge)
-    print(userAgeInt)
-    if userAgeInt > 20:
-        print("You are over 20")
-    if userAgeInt < 20:
-        print("You are under 20")
-    if userAgeInt == 20:
-        print("You are 20 years old")
-
-    print(userName[::-1])
-    print(userName[1:-1])
-    print(userName[-3:])
-    print(userName[:5])
-
-    nameLen = len(userName)
-    print("nameLen =", nameLen)
-    i = 0
-    summ = 0
-    mult = 1
-    while i < len(userAge):
-        summ = summ + int(userAge[i])
-        mult = mult * int(userAge[i])
-        i +=1
-    print("sum=",summ,"mult=",mult)
-
-    print(userName.upper(),userName.lower(),userName[::-1].capitalize(),userName.capitalize())
-
-    print("2+2*2")
-    a = -1
-    input(a)
-    if a == 6:
-        print("correct")
-    else:
-        print("incorrect")
+    canv.pack()
+    canv.mainloop()
 
 
 main()
